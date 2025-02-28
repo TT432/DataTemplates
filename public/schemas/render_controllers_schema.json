@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "render controller",
+  "type": "object",
+  "properties": {
+    "render_controllers": {
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "geometry": {
+            "description": "用于设置模型的 molang",
+            "type": "string"
+          },
+          "textures": {
+            "description": "用于设置纹理的 molang 列表，结果会叠加成一个新的纹理",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "arrays": {
+            "type": "object",
+            "description": "设定列表",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "materials": {
+            "description": "设置 material 的 molang 表，键是骨骼选择器，目前只有 \"*\" 是有效的，值是 material 的短名称（参见 client entity）",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
