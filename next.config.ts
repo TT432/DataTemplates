@@ -1,14 +1,20 @@
 import type { NextConfig } from "next";
-const isProd = process.env.NODE_ENV === 'production'
-const repoName = 'DataTemplates' // 你的仓库名称
 
-const nextConfig = {
-  output: 'export', // 启用静态导出
-  assetPrefix: isProd ? `/${repoName}/` : '',
-  basePath: isProd ? `/${repoName}` : '',
-  images: {
-    unoptimized: true // 禁用图片优化（GitHub Pages 需要）
-  }
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
+const repo = "DataTemplates";
+let assetPrefix = "";
+let basePath = "";
+
+if (isGithubActions) {
+  // 去掉 `<owner>/`
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, "");
+  assetPrefix = `/${repo}/`;
+  basePath = `/${repo}`;
+}
+const nextConfig: NextConfig = {
+  basePath,
+  assetPrefix,
+  output: "export",
 }
 
-export default nextConfig;
+module.exports = nextConfig;

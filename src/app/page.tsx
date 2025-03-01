@@ -2,56 +2,9 @@
 
 import Form from '@rjsf/mui';
 import validator from '@rjsf/validator-ajv8';
-import { RJSFSchema } from '@rjsf/utils';
 import { useState, useEffect } from 'react';
 import './FormPage.css';
 import JSONPretty from 'react-json-pretty';
-
-const schema: RJSFSchema = {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "render controller",
-  "type": "object",
-  "properties": {
-    "render_controllers": {
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "geometry": {
-            "description": "用于设置模型的 molang",
-            "type": "string"
-          },
-          "textures": {
-            "description": "用于设置纹理的 molang 列表，结果会叠加成一个新的纹理",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "arrays": {
-            "type": "object",
-            "description": "设定列表",
-            "additionalProperties": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "materials": {
-            "description": "设置 material 的 molang 表，键是骨骼选择器，目前只有 \"*\" 是有效的，值是 material 的短名称（参见 client entity）",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    }
-  }
-};
 
 import { UiSchema } from '@rjsf/utils';
 import { IChangeEvent } from '@rjsf/core';
@@ -162,7 +115,7 @@ export default function MyApp() {
         {isPanelOpen && (
           <div className="panel-content">
             <div className="panel-header">
-              <h3>实时表单数据</h3>
+              <h3>数据</h3>
               <div className="panel-actions">
                 <button
                   onClick={handleCopy}
